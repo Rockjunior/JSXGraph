@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Number Line</title>
+    <script src="https://cdn.jsdelivr.net/npm/jsxgraph@1.2.3/distrib/jsxgraphcore.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+    <div id="jxgbox" class="jxgbox" style="width:600px; height:100px;"></div>
+    <div id="equation" style="margin-top: 20px; font-size: 20px;">Equation: \(4 \leq x \leq 8\)</div>
+
+    <script>
+        var board = JXG.JSXGraph.initBoard('jxgbox', {
+            boundingbox: [1, 1, 15, -1],
+            axis: true,
+            showNavigation: true
+        });
+
+        var pointA = board.create('point', [4, 0], {fixed: false, size: 2});
+        var pointB = board.create('point', [8, 0], {fixed: false, size: 2});
+        var line = board.create('line', [pointA, pointB], {straightFirst: false, straightLast: false, strokeWidth: 2});
+
+        function updateEquation() {
+            var a = Math.round(pointA.X());
+            var b = Math.round(pointB.X());
+            document.getElementById('equation').innerHTML = `Equation: \\(${a} \\leq x \\leq ${b}\\)`;
+            MathJax.typeset();
+        }
+
+        pointA.on('drag', updateEquation);
+        pointB.on('drag', updateEquation);
+    </script>
+
+</body>
+</html>
