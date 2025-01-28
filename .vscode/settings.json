@@ -1,3 +1,4 @@
 {
-    "git.autoStash": true
+    "git.autoStash": true,
+    "livePreview.defaultPreviewPath": "/projects/georg/robot.html"
 }
